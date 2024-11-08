@@ -1,4 +1,8 @@
 # Focusly - Student Reminder App
 
-A productivity app designed to help students keep track of assignments, exams, and study schedules.
+A minimal, menu-driven application that allows students to:
+
+Add tasks with details like deadlines and priority.
+View tasks in an organized list.
+Delete tasks.
 
