@@ -29,3 +29,21 @@ class FocuslyApp:
         task = Task(name, description, deadline, priority, tags)
         self.tasks.append(task)
         print("Task added successfully!\n")
+
+    # TaskListing Display
+        def list_tasks(self):
+            print("All Tasks (sorted by priority and deadline):")
+            sorted_tasks = sorted(self.tasks, key=lambda x: (x.priority, x.deadline))
+            for task in sorted_tasks:
+                print(task)
+
+    # Tracker for Completions
+    def mark_task_complete(self):
+        self.list_tasks()
+        task_name = input("Enter the name of the task to mark as complete: ")
+        for task in self.tasks:
+            if task.name == task_name:
+                task.completed = True
+                print(f"Task '{task_name}' marked as complete!\n")
+                return
+        print("Task not found.\n")
