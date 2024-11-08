@@ -62,3 +62,24 @@ class FocuslyApp:
                 print(f"Task '{task_name}' marked as complete!\n")
                 return
         print("Task not found.\n")
+
+        # TaskSummarizing Functionality (weekly summary of tasks, based on deadline)
+    def weekly_summary(self):
+        print("Weekly Summary of Upcoming Tasks:")
+        for task in self.tasks:
+            if not task.completed:
+                print(task)
+
+    # Tagging System (filters tasks by tags)
+    def list_tasks_by_tag(self):
+        tag = input("Enter the tag to filter by: ")
+        print(f"Tasks tagged with '{tag}':")
+        for task in self.tasks:
+            if tag in task.tags:
+                print(task)
+
+    # Startup Screen
+    def start_screen(self):
+        print("Welcome to Focusly - Your Task and Time Management App for Students")
+        print("Options:\n1. Add Task\n2. List Tasks\n3. Mark Task as Complete\n"
+              "4. Delete Task\n5. View Weekly Summary\n6. List Tasks by Tag\n7. View Reminders\n8. Exit")
