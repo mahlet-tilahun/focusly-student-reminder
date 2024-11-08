@@ -83,3 +83,33 @@ class FocuslyApp:
         print("Welcome to Focusly - Your Task and Time Management App for Students")
         print("Options:\n1. Add Task\n2. List Tasks\n3. Mark Task as Complete\n"
               "4. Delete Task\n5. View Weekly Summary\n6. List Tasks by Tag\n7. View Reminders\n8. Exit")
+           # Main application loop
+    def run(self):
+        while True:
+            self.start_screen()
+            choice = input("Choose an option: ")
+            if choice == '1':
+                self.add_task()
+            elif choice == '2':
+                self.list_tasks()
+            elif choice == '3':
+                self.mark_task_complete()
+            elif choice == '4':
+                self.delete_task()
+            elif choice == '5':
+                self.weekly_summary()
+            elif choice == '6':
+                self.list_tasks_by_tag()
+            elif choice == '7':
+                self.reminder()
+            elif choice == '8':
+                print("Exiting Focusly. Have a productive day!")
+                break
+            else:
+                print("Invalid option. Please try again.\n")
+
+# Run the application
+if __name__ == "__main__":
+    app = FocuslyApp()
+    app.run()
+
