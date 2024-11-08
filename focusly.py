@@ -29,3 +29,17 @@ class FocuslyApp:
         task = Task(name, description, deadline, priority, tags)
         self.tasks.append(task)
         print("Task added successfully!\n")
+
+         # Reminder Mechanism (prints tasks with priority '1' or nearing deadlines)
+    def reminder(self):
+        print("High-Priority Tasks and Tasks Near Deadline:")
+        for task in self.tasks:
+            if not task.completed and task.priority == '1':
+                print(task)
+
+    # TaskDeletion Functionality
+    def delete_task(self):
+        self.list_tasks()
+        task_name = input("Enter the name of the task to delete: ")
+        self.tasks = [task for task in self.tasks if task.name != task_name]
+        print(f"Task '{task_name}' deleted!\n")
