@@ -18,6 +18,13 @@ class Task:
 class FocuslyApp:
     def __init__(self):
         self.tasks = []
+        self.user_name = None  # To store the user's name
+
+    def greet_user(self):
+        """Greets the user and stores their name if not already stored."""
+        if not self.user_name:
+            self.user_name = input("Welcome to Focusly! What's your name? ")
+        print(f"Hello, {self.user_name}! Let's get productive today!\n")
 
     # TaskInserter Functionality
     def add_task(self):
@@ -30,8 +37,7 @@ class FocuslyApp:
         self.tasks.append(task)
         print("Task added successfully!\n")
 
-
-         # Reminder Mechanism (prints tasks with priority '1' or nearing deadlines)
+    # Reminder Mechanism (prints tasks with priority '1' or nearing deadlines)
     def reminder(self):
         print("High-Priority Tasks and Tasks Near Deadline:")
         for task in self.tasks:
@@ -46,11 +52,11 @@ class FocuslyApp:
         print(f"Task '{task_name}' deleted!\n")
 
     # TaskListing Display
-        def list_tasks(self):
-            print("All Tasks (sorted by priority and deadline):")
-            sorted_tasks = sorted(self.tasks, key=lambda x: (x.priority, x.deadline))
-            for task in sorted_tasks:
-                print(task)
+    def list_tasks(self):
+        print("All Tasks (sorted by priority and deadline):")
+        sorted_tasks = sorted(self.tasks, key=lambda x: (x.priority, x.deadline))
+        for task in sorted_tasks:
+            print(task)
 
     # Tracker for Completions
     def mark_task_complete(self):
@@ -63,7 +69,7 @@ class FocuslyApp:
                 return
         print("Task not found.\n")
 
-        # TaskSummarizing Functionality (weekly summary of tasks, based on deadline)
+    # TaskSummarizing Functionality (weekly summary of tasks, based on deadline)
     def weekly_summary(self):
         print("Weekly Summary of Upcoming Tasks:")
         for task in self.tasks:
@@ -83,8 +89,10 @@ class FocuslyApp:
         print("Welcome to Focusly - Your Task and Time Management App for Students")
         print("Options:\n1. Add Task\n2. List Tasks\n3. Mark Task as Complete\n"
               "4. Delete Task\n5. View Weekly Summary\n6. List Tasks by Tag\n7. View Reminders\n8. Exit")
-           # Main application loop
+
+    # Main application loop
     def run(self):
+        self.greet_user()  # Greet the user at the beginning
         while True:
             self.start_screen()
             choice = input("Choose an option: ")
@@ -103,10 +111,11 @@ class FocuslyApp:
             elif choice == '7':
                 self.reminder()
             elif choice == '8':
-                print("Exiting Focusly. Have a productive day!")
+                print(f"Goodbye, {self.user_name}! Have a productive day!")
                 break
             else:
                 print("Invalid option. Please try again.\n")
+
 
 # Run the application
 if __name__ == "__main__":
