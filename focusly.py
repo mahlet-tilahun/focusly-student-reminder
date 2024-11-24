@@ -86,33 +86,53 @@ class FocuslyApp:
         if choice == '1':
             cursor.execute("SELECT name, description, deadline, priority, tags, completed FROM tasks ORDER BY priority, deadline")
             tasks = cursor.fetchall()
-            for row in tasks:
+            # Print table headers
+            print("\n{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format("ID", "Name", "Description", "Deadline", "Priority", "Status"))
+            print("-" * 110)
+            for idx, row in enumerate(tasks, start=1):
                 task = Task(*row[:-1], completed=row[-1])
-                print(task)
+                # Ensure proper date formatting
+                deadline = task.deadline if isinstance(task.deadline, str) else task.deadline.strftime('%Y-%m-%d')
+                print("{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format(idx, task.name, task.description, deadline, task.priority, "Completed" if task.completed else "Pending"))
 
         elif choice == '2':
             cursor.execute("SELECT name, description, deadline, priority, tags, completed FROM tasks WHERE completed = FALSE ORDER BY priority, deadline")
             tasks = cursor.fetchall()
-            for row in tasks:
+            # Print table headers
+            print("\n{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format("ID", "Name", "Description", "Deadline", "Priority", "Status"))
+            print("-" * 110)
+            for idx, row in enumerate(tasks, start=1):
                 task = Task(*row[:-1], completed=row[-1])
-                print(task)
+                # Ensure proper date formatting
+                deadline = task.deadline if isinstance(task.deadline, str) else task.deadline.strftime('%Y-%m-%d')
+                print("{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format(idx, task.name, task.description, deadline, task.priority, "Completed" if task.completed else "Pending"))
 
         elif choice == '3':
             today = datetime.today()
             week_later = today + timedelta(days=7)
             cursor.execute("SELECT name, description, deadline, priority, tags, completed FROM tasks WHERE completed = FALSE AND deadline BETWEEN %s AND %s ORDER BY priority, deadline", (today, week_later))
             tasks = cursor.fetchall()
-            for row in tasks:
+            # Print table headers
+            print("\n{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format("ID", "Name", "Description", "Deadline", "Priority", "Status"))
+            print("-" * 110)
+            for idx, row in enumerate(tasks, start=1):
                 task = Task(*row[:-1], completed=row[-1])
-                print(task)
+                # Ensure proper date formatting
+                deadline = task.deadline if isinstance(task.deadline, str) else task.deadline.strftime('%Y-%m-%d')
+                print("{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format(idx, task.name, task.description, deadline, task.priority, "Completed" if task.completed else "Pending"))
 
         elif choice == '4':
             tag = input("Enter the tag to filter by: ")
             cursor.execute("SELECT name, description, deadline, priority, tags, completed FROM tasks WHERE tags LIKE %s ORDER BY priority, deadline", ('%' + tag + '%',))
             tasks = cursor.fetchall()
-            for row in tasks:
+            # Print table headers
+            print("\n{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format("ID", "Name", "Description", "Deadline", "Priority", "Status"))
+            print("-" * 110)
+            for idx, row in enumerate(tasks, start=1):
                 task = Task(*row[:-1], completed=row[-1])
-                print(task)
+                # Ensure proper date formatting
+                deadline = task.deadline if isinstance(task.deadline, str) else task.deadline.strftime('%Y-%m-%d')
+                print("{:<5} {:<25} {:<40} {:<15} {:<10} {:<10}".format(idx, task.name, task.description, deadline, task.priority, "Completed" if task.completed else "Pending"))
 
         else:
             print("Invalid choice. Please try again.\n")
@@ -167,13 +187,13 @@ class FocuslyApp:
             elif choice == '5':
                 self.reminder()
             elif choice == '6':
-                print("Exiting Focusly. Have a productive day!")
+                print("Goodbye!")
                 break
             else:
                 print("Invalid option. Please try again.\n")
 
 
-# Run the application
+# Run the Focusly app
 if __name__ == "__main__":
     app = FocuslyApp()
     app.run()
