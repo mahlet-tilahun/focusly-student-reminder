@@ -54,4 +54,3 @@ Choose from the menu options:
 4. Delete Task: Permanently delete a task.
 5. View Reminders: View high-priority or urgent tasks.
 6. Exit: Quit the app.
-
