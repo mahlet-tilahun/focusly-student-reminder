@@ -23,15 +23,6 @@ class Task:
 class FocuslyApp:
     def __init__(self):
         self.tasks = []
-<<<<<<< HEAD
-        self.user_name = None  # To store the user's name
-
-    def greet_user(self):
-        """Greets the user and stores their name if not already stored."""
-        if not self.user_name:
-            self.user_name = input("Welcome to Focusly! What's your name? ")
-        print(f"Hello, {self.user_name}! Let's get productive today!\n")
-=======
         self.connection = self.connect_to_db()
 
     def connect_to_db(self):
@@ -64,7 +55,6 @@ class FocuslyApp:
             )
         """)
         connection.commit()
->>>>>>> 53fe4c29f1ced94ecc8a3c6d3068bc6a2ec7ceec
 
     def add_task(self):
         name = input("Enter task name: ")
@@ -108,9 +98,6 @@ class FocuslyApp:
         print("4. View Tasks by Tag")
         choice = input("Enter your choice: ")
 
-<<<<<<< HEAD
-    # Reminder Mechanism (prints tasks with priority '1' or nearing deadlines)
-=======
         cursor = self.connection.cursor()
         if choice == '1':
             cursor.execute("SELECT name, description, deadline, priority, tags, completed FROM tasks ORDER BY priority, deadline")
@@ -162,7 +149,6 @@ class FocuslyApp:
         else:
             print("Invalid choice. Please try again.\n")
 
->>>>>>> 53fe4c29f1ced94ecc8a3c6d3068bc6a2ec7ceec
     def reminder(self):
         print("High-Priority Tasks and Tasks Near Deadline:")
         cursor = self.connection.cursor()
@@ -180,64 +166,19 @@ class FocuslyApp:
         self.connection.commit()
         print(f"Task '{task_name}' deleted!\n")
 
-<<<<<<< HEAD
-    # TaskListing Display
-    def list_tasks(self):
-        print("All Tasks (sorted by priority and deadline):")
-        sorted_tasks = sorted(self.tasks, key=lambda x: (x.priority, x.deadline))
-        for task in sorted_tasks:
-            print(task)
-
-    # Tracker for Completions
-=======
->>>>>>> 53fe4c29f1ced94ecc8a3c6d3068bc6a2ec7ceec
     def mark_task_complete(self):
         task_name = input("Enter the name of the task to mark as complete: ")
-<<<<<<< HEAD
-        for task in self.tasks:
-            if task.name == task_name:
-                task.completed = True
-                print(f"Task '{task_name}' marked as complete!\n")
-                return
-        print("Task not found.\n")
-
-    # TaskSummarizing Functionality (weekly summary of tasks, based on deadline)
-    def weekly_summary(self):
-        print("Weekly Summary of Upcoming Tasks:")
-        for task in self.tasks:
-            if not task.completed:
-                print(task)
-
-    # Tagging System (filters tasks by tags)
-    def list_tasks_by_tag(self):
-        tag = input("Enter the tag to filter by: ")
-        print(f"Tasks tagged with '{tag}':")
-        for task in self.tasks:
-            if tag in task.tags:
-                print(task)
-
-    # Startup Screen
-=======
         cursor = self.connection.cursor()
         cursor.execute("UPDATE tasks SET completed = TRUE WHERE name = %s", (task_name,))
         self.connection.commit()
         print(f"Task '{task_name}' marked as complete!\n")
 
->>>>>>> 53fe4c29f1ced94ecc8a3c6d3068bc6a2ec7ceec
     def start_screen(self):
         print("Options:\n1. Add Task\n2. List Tasks\n3. Mark Task as Complete\n"
-<<<<<<< HEAD
-              "4. Delete Task\n5. View Weekly Summary\n6. List Tasks by Tag\n7. View Reminders\n8. Exit")
-
-    # Main application loop
-    def run(self):
-        self.greet_user()  # Greet the user at the beginning
-=======
               "4. Delete Task\n5. View Reminders\n6. Exit")
 
     def run(self):
         print("Welcome to Focusly!")
->>>>>>> 53fe4c29f1ced94ecc8a3c6d3068bc6a2ec7ceec
         while True:
             self.start_screen()
             option = input("Enter your choice: ")
@@ -251,24 +192,14 @@ class FocuslyApp:
                 self.delete_task()
             elif option == '5':
                 self.reminder()
-<<<<<<< HEAD
-            elif choice == '8':
-                print(f"Goodbye, {self.user_name}! Have a productive day!")
-=======
             elif option == '6':
                 print("Goodbye!")
->>>>>>> 53fe4c29f1ced94ecc8a3c6d3068bc6a2ec7ceec
                 break
             else:
                 print("Invalid choice. Please try again.\n")
 
 
-<<<<<<< HEAD
-
-# Run the application
-=======
 # Run the app
->>>>>>> 53fe4c29f1ced94ecc8a3c6d3068bc6a2ec7ceec
 if __name__ == "__main__":
     app = FocuslyApp()
     app.run()
